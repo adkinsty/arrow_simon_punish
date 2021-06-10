@@ -1784,7 +1784,7 @@ function trialRoutineEnd(snapshot) {
     }
     
     accs.push(acc);
-    rews.push(punish);
+    puns.push(punish);
     
     psychoJS.experiment.addData("target_onset", target_onset);
     psychoJS.experiment.addData("acc", acc);
