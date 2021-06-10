@@ -125,7 +125,7 @@ var dot3;
 var dot4;
 var target;
 var trial_resp;
-var accs;
+var errs;
 var puns;
 var too_slows;
 var too_soons;
@@ -355,7 +355,7 @@ function experimentInit() {
   });
   trial_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
-  accs = [];
+  errs = [];
   puns = [];
   too_slows = [];
   too_soons = [];
@@ -1721,7 +1721,7 @@ function trialRoutineEachFrame(snapshot) {
 
 var too_slow;
 var too_soon;
-var acc;
+var err;
 var feedback_test_msg;
 var feedback_duration;
 function trialRoutineEnd(snapshot) {
@@ -1755,19 +1755,19 @@ function trialRoutineEnd(snapshot) {
         too_slow = false;
         too_soon = false;
         if ((trial_resp.corr === 1)) {
-            acc = 1;
+            err = 0;
         } else {
-            acc = 0;
+            err = 1;
         }
     } else {
         if ((rt > 1.6)) {
             too_slow = true;
             too_soon = false;
-            acc = 0;
+            err = 1;
         } else {
             too_slow = false;
             too_soon = true;
-            acc = 0;
+            err = 1;
         }
     }
     if (too_slow) {
@@ -1783,11 +1783,11 @@ function trialRoutineEnd(snapshot) {
         }
     }
     
-    accs.push(acc);
+    errs.push(err);
     puns.push(punish);
     
     psychoJS.experiment.addData("target_onset", target_onset);
-    psychoJS.experiment.addData("acc", acc);
+    psychoJS.experiment.addData("err", err);
     psychoJS.experiment.addData("pun", punish);
     
     // the Routine "trial" was not non-slip safe, so reset the non-slip timer
@@ -2031,7 +2031,7 @@ function block_noteRoutineEnd(snapshot) {
 var _complete_resp_allKeys;
 var N_trials;
 var rand_trial;
-var rand_acc;
+var rand_err;
 var rand_rew;
 var trial_msg;
 var acc_msg;
@@ -2052,10 +2052,10 @@ function completionRoutineBegin(snapshot) {
     _complete_resp_allKeys = [];
     N_trials = 16; //599; reduced for testing....
     rand_trial = Math.floor(Math.random()*N_trials);
-    rand_acc = accs[rand_trial];
-    rand_rew = 5 - (puns[rand_trial] * rand_acc);
+    rand_err = errs[rand_trial];
+    rand_rew = 5 - (puns[rand_trial] * rand_err);
     trial_msg = (((("Trial number " + rand_trial.toString()) + " was selected at random. This trial was worth -") + puns[rand_trial].toString()) + " US dollars. ");
-    if ((rand_acc == 1)) {
+    if ((rand_err == 0)) {
         acc_msg = "You responded correctly on this trial. ";
     } else {
         acc_msg = "You responded incorrectly on this trial. ";
@@ -2064,7 +2064,7 @@ function completionRoutineBegin(snapshot) {
     space_msg = "Please press the space bar to conclude this experiment. ";
     complete_msg = (((trial_msg + acc_msg) + rew_msg) + space_msg);
     console.log(rand_trial);
-    console.log(rand_acc);
+    console.log(rand_err);
     console.log(rand_rew);
     console.log(complete_msg);
     // keep track of which components have finished
