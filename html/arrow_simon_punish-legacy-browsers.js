@@ -2168,7 +2168,7 @@ function completionRoutineEnd(snapshot) {
     
     complete_resp.stop();
     psychoJS.experiment.addData("raffle_trial", rand_trial);
-    psychoJS.experiment.addData("raffle_acc", rand_acc);
+    psychoJS.experiment.addData("raffle_err", rand_err);
     psychoJS.experiment.addData("raffle_rew", rand_rew);
     // the Routine "completion" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();

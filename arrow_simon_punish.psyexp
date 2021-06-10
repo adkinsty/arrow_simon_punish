@@ -878,7 +878,7 @@
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="End JS Routine" updates="constant" val="psychoJS.experiment.addData(&quot;raffle_trial&quot;, rand_trial);&amp;#10;psychoJS.experiment.addData(&quot;raffle_acc&quot;, rand_acc);&amp;#10;psychoJS.experiment.addData(&quot;raffle_rew&quot;, rand_rew);" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="psychoJS.experiment.addData(&quot;raffle_trial&quot;, rand_trial);&amp;#10;psychoJS.experiment.addData(&quot;raffle_err&quot;, rand_err);&amp;#10;psychoJS.experiment.addData(&quot;raffle_rew&quot;, rand_rew);" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="name" updates="None" val="complete_code" valType="code"/>
