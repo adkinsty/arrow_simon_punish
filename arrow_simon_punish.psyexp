@@ -871,7 +871,7 @@
         <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode"/>
-        <Param name="Begin JS Routine" updates="constant" val="rand_trial = Math.floor(Math.random()*599);&amp;#10;rand_acc = accs[rand_trial];&amp;#10;rand_rew = 5 - (puns[rand_trial] * rand_acc);&amp;#10;trial_msg = ((((&quot;Trial number &quot; + rand_trial.toString()) + &quot; was selected at random. This trial was worth -&quot;) + puns[rand_trial].toString()) + &quot; US dollars. &quot;);&amp;#10;if ((rand_acc == 1)) {&amp;#10;    acc_msg = &quot;You responded correctly on this trial. &quot;;&amp;#10;} else {&amp;#10;    acc_msg = &quot;You responded incorrectly on this trial. &quot;;&amp;#10;}&amp;#10;rew_msg = ((&quot;You earned a cash bonus of &quot; + rand_rew.toString()) + &quot; US dollars. &quot;);&amp;#10;space_msg = &quot;Please press the space bar to conclude this experiment. &quot;;&amp;#10;complete_msg = (((trial_msg + acc_msg) + rew_msg) + space_msg);&amp;#10;console.log(rand_trial);&amp;#10;console.log(rand_acc);&amp;#10;console.log(rand_rew);&amp;#10;console.log(complete_msg);" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="N_trials = 16; //599; reduced for testing....&amp;#10;rand_trial = Math.floor(Math.random()*N_trials);&amp;#10;rand_acc = accs[rand_trial];&amp;#10;rand_rew = 5 - (puns[rand_trial] * rand_acc);&amp;#10;trial_msg = ((((&quot;Trial number &quot; + rand_trial.toString()) + &quot; was selected at random. This trial was worth -&quot;) + puns[rand_trial].toString()) + &quot; US dollars. &quot;);&amp;#10;if ((rand_acc == 1)) {&amp;#10;    acc_msg = &quot;You responded correctly on this trial. &quot;;&amp;#10;} else {&amp;#10;    acc_msg = &quot;You responded incorrectly on this trial. &quot;;&amp;#10;}&amp;#10;rew_msg = ((&quot;You earned a cash bonus of &quot; + rand_rew.toString()) + &quot; US dollars. &quot;);&amp;#10;space_msg = &quot;Please press the space bar to conclude this experiment. &quot;;&amp;#10;complete_msg = (((trial_msg + acc_msg) + rew_msg) + space_msg);&amp;#10;console.log(rand_trial);&amp;#10;console.log(rand_acc);&amp;#10;console.log(rand_rew);&amp;#10;console.log(complete_msg);" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="JS" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
@@ -985,9 +985,9 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
-      <Param name="nReps" updates="None" val="10" valType="code"/>
+      <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="name" updates="None" val="trials_train_simon" valType="code"/>
-      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="random seed" updates="None" val="10" valType="code"/>
     </LoopInitiator>
     <Routine name="trial_train_simon"/>
     <Routine name="feedback"/>
@@ -1000,9 +1000,9 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="60" valType="code"/>
+      <Param name="nReps" updates="None" val="6" valType="code"/>
       <Param name="name" updates="None" val="trials_train_timing" valType="code"/>
-      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="random seed" updates="None" val="60" valType="code"/>
     </LoopInitiator>
     <Routine name="trial_train_timing"/>
     <Routine name="feedback_timing"/>
@@ -1015,9 +1015,9 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="False" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="5" valType="code"/>
+      <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="name" updates="None" val="blocks" valType="code"/>
-      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="random seed" updates="None" val="5" valType="code"/>
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="trials">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
@@ -1026,9 +1026,9 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
-      <Param name="nReps" updates="None" val="15" valType="code"/>
+      <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="name" updates="None" val="trials" valType="code"/>
-      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="random seed" updates="None" val="15" valType="code"/>
     </LoopInitiator>
     <Routine name="trial"/>
     <Routine name="feedback_test"/>

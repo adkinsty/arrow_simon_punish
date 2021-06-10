@@ -583,10 +583,10 @@ function trials_train_simonLoopBegin(trials_train_simonLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   trials_train_simon = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 10, method: TrialHandler.Method.RANDOM,
+    nReps: 2, method: TrialHandler.Method.RANDOM,
     extraInfo: expInfo, originPath: undefined,
     trialList: 'trial_conditions.csv',
-    seed: undefined, name: 'trials_train_simon'
+    seed: 10, name: 'trials_train_simon'
   });
   psychoJS.experiment.addLoop(trials_train_simon); // add the loop to the experiment
   currentLoop = trials_train_simon;  // we're now the current loop
@@ -620,10 +620,10 @@ function trials_train_timingLoopBegin(trials_train_timingLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   trials_train_timing = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 60, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: 6, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
-    seed: undefined, name: 'trials_train_timing'
+    seed: 60, name: 'trials_train_timing'
   });
   psychoJS.experiment.addLoop(trials_train_timing); // add the loop to the experiment
   currentLoop = trials_train_timing;  // we're now the current loop
@@ -657,10 +657,10 @@ function blocksLoopBegin(blocksLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   blocks = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 5, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: 2, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: 'block_conditions.csv',
-    seed: undefined, name: 'blocks'
+    seed: 5, name: 'blocks'
   });
   psychoJS.experiment.addLoop(blocks); // add the loop to the experiment
   currentLoop = blocks;  // we're now the current loop
@@ -688,10 +688,10 @@ function trialsLoopBegin(trialsLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   trials = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 15, method: TrialHandler.Method.RANDOM,
+    nReps: 2, method: TrialHandler.Method.RANDOM,
     extraInfo: expInfo, originPath: undefined,
     trialList: 'trial_conditions.csv',
-    seed: undefined, name: 'trials'
+    seed: 15, name: 'trials'
   });
   psychoJS.experiment.addLoop(trials); // add the loop to the experiment
   currentLoop = trials;  // we're now the current loop
@@ -2026,6 +2026,7 @@ function block_noteRoutineEnd(snapshot) {
 
 
 var _complete_resp_allKeys;
+var N_trials;
 var rand_trial;
 var rand_acc;
 var rand_rew;
@@ -2046,7 +2047,8 @@ function completionRoutineBegin(snapshot) {
     complete_resp.keys = undefined;
     complete_resp.rt = undefined;
     _complete_resp_allKeys = [];
-    rand_trial = Math.floor(Math.random()*599);
+    N_trials = 16; //599; reduced for testing....
+    rand_trial = Math.floor(Math.random()*N_trials);
     rand_acc = accs[rand_trial];
     rand_rew = 5 - (puns[rand_trial] * rand_acc);
     trial_msg = (((("Trial number " + rand_trial.toString()) + " was selected at random. This trial was worth -") + puns[rand_trial].toString()) + " US dollars. ");
