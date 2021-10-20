@@ -28,7 +28,7 @@ psychoJS.openWindow({
 
 // store info about the experiment session:
 let expName = 'arrow_simon_punish';  // from the Builder filename that created this script
-let expInfo = {'participant': '', 'session': '001'};
+let expInfo = {'participant': ''};
 
 // Start code blocks for 'Before Experiment'
 // schedule the experiment:
@@ -97,7 +97,7 @@ function updateInfo() {
 
   // add info from the URL:
   util.addInfoFromUrl(expInfo);
-  psychoJS.setRedirectUrls('https://app.prolific.co/submissions/complete?cc=ABCDEFG', '');
+  psychoJS.setRedirectUrls('https://app.prolific.co/submissions/complete?cc=4D95157C', '');
 
   return Scheduler.Event.NEXT;
 }
@@ -583,10 +583,10 @@ function trials_train_simonLoopBegin(trials_train_simonLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   trials_train_simon = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 2, method: TrialHandler.Method.RANDOM,
+    nReps: 10, method: TrialHandler.Method.RANDOM,
     extraInfo: expInfo, originPath: undefined,
     trialList: 'trial_conditions.csv',
-    seed: 10, name: 'trials_train_simon'
+    seed: undefined, name: 'trials_train_simon'
   });
   psychoJS.experiment.addLoop(trials_train_simon); // add the loop to the experiment
   currentLoop = trials_train_simon;  // we're now the current loop
@@ -620,10 +620,10 @@ function trials_train_timingLoopBegin(trials_train_timingLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   trials_train_timing = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 6, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: 60, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: undefined,
-    seed: 60, name: 'trials_train_timing'
+    seed: undefined, name: 'trials_train_timing'
   });
   psychoJS.experiment.addLoop(trials_train_timing); // add the loop to the experiment
   currentLoop = trials_train_timing;  // we're now the current loop
@@ -657,10 +657,10 @@ function blocksLoopBegin(blocksLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   blocks = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 2, method: TrialHandler.Method.SEQUENTIAL,
+    nReps: 5, method: TrialHandler.Method.SEQUENTIAL,
     extraInfo: expInfo, originPath: undefined,
     trialList: 'block_conditions.csv',
-    seed: 5, name: 'blocks'
+    seed: undefined, name: 'blocks'
   });
   psychoJS.experiment.addLoop(blocks); // add the loop to the experiment
   currentLoop = blocks;  // we're now the current loop
@@ -688,10 +688,10 @@ function trialsLoopBegin(trialsLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   trials = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 2, method: TrialHandler.Method.RANDOM,
+    nReps: 15, method: TrialHandler.Method.RANDOM,
     extraInfo: expInfo, originPath: undefined,
     trialList: 'trial_conditions.csv',
-    seed: 15, name: 'trials'
+    seed: undefined, name: 'trials'
   });
   psychoJS.experiment.addLoop(trials); // add the loop to the experiment
   currentLoop = trials;  // we're now the current loop
