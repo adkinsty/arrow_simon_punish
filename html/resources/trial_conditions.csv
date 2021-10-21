@@ -1,5 +1,5 @@
-target_file,target_pos,target_resp
-right.png,"[-0.33,0]",p
-right.png,"[0.33,0]",p
-left.png,"[-0.33,0]",w
-left.png,"[0.33,0]",w
+target_file,target_pos,target_resp,target_side
+right.png,"[-0.33,0]",p,left
+right.png,"[0.33,0]",p,right
+left.png,"[-0.33,0]",w,left
+left.png,"[0.33,0]",w,right

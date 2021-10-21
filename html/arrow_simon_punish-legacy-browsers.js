@@ -276,7 +276,7 @@ function experimentInit() {
   instruct_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'instruct_text',
-    text: 'You are about to begin a block of trials in a timed arrow response game. You will respond to arrows like in the first block of practice trials, but you will need to time your responses perfectly, like in the second block of practice trials.\n\nAs in the first practice block, at a random time during the trial, a white arrow will appear on the right or left side of the screen. You will next press a key to report the direction of the arrow.\n\n* If the arrow points RIGHT, press the P key with your RIGHT pointer finger.\n* If the arrow points LEFT, press the W key with your LEFT pointer finger.\n\nAs in the second practice block, each trial you will see a black cross in the center of the screen. The cross will turn into a black dot that flashes three times. After the third flash, a WHITE DOT will appear at the center of the screen.\n\nPlease respond exactly when the WHITE DOT appears.\n\n**IMPORTANT INFORMATION ABOUT CASH BONUSES**\n\nYou will begin with a cash bonus of $5. However, at the end of the experiment, one trial that you completed will be selected at random. If you made the INCORRECT RESPONSE  on this randomly selected trial OR you responded at the INCORRECT TIME, then you will incur the CASH PENALTY associated with that trial. \n\nCash penalties will be either minus $1 or minus $5 dollars from your initial endowment of $5.\n\nThe cash penalty amount will vary between blocks of trials and the amount will be presented in RED text at the start of each trial. \n\nWhen you are ready to begin the first block, please press the SPACE BAR. ',
+    text: 'You are about to begin a block of trials in a timed arrow response game. You will respond to arrows like in the first block of practice trials, but you will need to time your responses perfectly, like in the second block of practice trials.\n\nAs in the first practice block, at a random time during the trial, a white arrow will appear on the right or left side of the screen. You will next press a key to report the direction of the arrow.\n\n* If the arrow points RIGHT, press the P key with your RIGHT pointer finger.\n* If the arrow points LEFT, press the W key with your LEFT pointer finger.\n\nAs in the second practice block, each trial you will see a black cross in the center of the screen. The cross will turn into a black dot that flashes three times. After the third flash, a WHITE DOT will appear at the center of the screen.\n\nPlease respond exactly when the WHITE DOT appears.\n\n**IMPORTANT INFORMATION ABOUT CASH BONUSES**\n\nYou will begin with a cash bonus of +5 dollars. However, at the end of the experiment, one trial that you completed will be selected at random in a raffle. If you made the INCORRECT RESPONSE  on this randomly selected trial OR you responded at the INCORRECT TIME, then you will incur the CASH PENALTY associated with that trial. \n\nCash penalties will be either minus 1 or minus 5 dollars from your initial endowment of 5 dollars.\n\nThe penalty size will occasionally change between -1 and -5, but this amount of cash that you stand to lose will be presented in GREEN text at the start of each trial. \n\nWhen you are ready to begin the first block, please press the SPACE BAR. ',
     font: 'Arial',
     units: undefined, 
     pos: [0, 0], height: 0.025,  wrapWidth: undefined, ori: 0,
@@ -295,7 +295,7 @@ function experimentInit() {
     font: 'Arial',
     units: undefined, 
     pos: [0, 0.1], height: 0.05,  wrapWidth: undefined, ori: 0,
-    color: new util.Color('red'),  opacity: 1,
+    color: new util.Color('green'),  opacity: 1,
     depth: 0.0 
   });
   
@@ -681,7 +681,7 @@ function trialsLoopBegin(trialsLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
   trials = new TrialHandler({
     psychoJS: psychoJS,
-    nReps: 15, method: TrialHandler.Method.RANDOM,
+    nReps: 15, method: TrialHandler.Method.FULLRANDOM,
     extraInfo: expInfo, originPath: undefined,
     trialList: 'trial_conditions.csv',
     seed: undefined, name: 'trials'
@@ -1664,7 +1664,7 @@ function trialRoutineEachFrame(snapshot) {
 
     
     // *trial_resp* updates
-    if (t >= 1 && trial_resp.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 1.5 && trial_resp.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       trial_resp.tStart = t;  // (not accounting for frame time here)
       trial_resp.frameNStart = frameN;  // exact frame index
@@ -1778,8 +1778,8 @@ function trialRoutineEnd(snapshot) {
             feedback_test_msg = "Too Fast";
             feedback_duration = 1;
         } else {
-            feedback_test_msg = "Good timing";
-            feedback_duration = 0;
+            feedback_test_msg = " ";
+            feedback_duration = 1;
         }
     }
     
@@ -1806,6 +1806,7 @@ function feedback_testRoutineBegin(snapshot) {
     feedback_testClock.reset(); // clock
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
+    routineTimer.add(1.000000);
     // update component parameters for each repeat
     // keep track of which components have finished
     feedback_testComponents = [];
@@ -1837,8 +1838,8 @@ function feedback_testRoutineEachFrame(snapshot) {
       feedback_test_text.setAutoDraw(true);
     }
 
-    frameRemains = feedback_duration  - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if ((feedback_test_text.status === PsychoJS.Status.STARTED || feedback_test_text.status === PsychoJS.Status.FINISHED) && t >= frameRemains) {
+    frameRemains = 0 + 1 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
+    if (feedback_test_text.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       feedback_test_text.setAutoDraw(false);
     }
     
@@ -1863,7 +1864,7 @@ function feedback_testRoutineEachFrame(snapshot) {
     });
     
     // refresh the screen if continuing
-    if (continueRoutine) {
+    if (continueRoutine && routineTimer.getTime() > 0) {
       return Scheduler.Event.FLIP_REPEAT;
     } else {
       return Scheduler.Event.NEXT;
@@ -1880,9 +1881,6 @@ function feedback_testRoutineEnd(snapshot) {
         thisComponent.setAutoDraw(false);
       }
     });
-    // the Routine "feedback_test" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset();
-    
     return Scheduler.Event.NEXT;
   };
 }
@@ -2016,7 +2014,7 @@ function block_noteRoutineEnd(snapshot) {
     block_later = true;
     block_one = false;
     
-    block_note_text_msg = (("Congrats. You completed block " + block_num.toString()) + " of 10. Feel free to relax for a moment. And remember: \n\n* If the circle is ORANGE, press the P key with your RIGHT pointer finger, and\n* If the circle is BLUE, press the W key with your LEFT pointer finger, and\n*Please respond exactly when the WHITE DOT appears.\n\nPress the SPACE BAR when you are ready to continue.");
+    block_note_text_msg = (("Congrats. You completed block " + block_num.toString()) + " of 10. Feel free to relax for a moment. And remember: \n\n* If the arrow points RIGHT, press the P key with your RIGHT pointer finger, and\n* If the arrow points LEFT, press the W key with your LEFT pointer finger, and\n*Please respond exactly when the WHITE DOT appears.\n\nPress the SPACE BAR when you are ready to continue.");
     
     block_nums.push(block_num);
     psychoJS.experiment.addData('block_num', block_num);
