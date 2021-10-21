@@ -2048,7 +2048,7 @@ function completionRoutineBegin(snapshot) {
     complete_resp.keys = undefined;
     complete_resp.rt = undefined;
     _complete_resp_allKeys = [];
-    N_trials = 16; //599; reduced for testing....
+    N_trials = 599; 
     rand_trial = Math.floor(Math.random()*N_trials);
     rand_err = errs[rand_trial];
     rand_rew = 5 - (puns[rand_trial] * rand_err);
