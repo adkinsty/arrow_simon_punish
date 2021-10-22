@@ -1663,7 +1663,7 @@ function trialRoutineEachFrame(snapshot) {
 
     
     // *trial_resp* updates
-    if (t >= 1.5 && trial_resp.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 1 && trial_resp.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       trial_resp.tStart = t;  // (not accounting for frame time here)
       trial_resp.frameNStart = frameN;  // exact frame index
